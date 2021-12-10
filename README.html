@@ -1,0 +1,38 @@
+<h1>plimit</h1>
+<p>Simple promise concurrency limiter</p>
+<h2>Installation</h2>
+<pre><code class="language-sh">npm install --save plimit
+</code></pre>
+<pre><code class="language-js"># node
+import { plimit } from 'plimit';
+</code></pre>
+<pre><code class="language-html">&lt;!-- browser --&gt;
+&lt;script src=&quot;/path/to/plimit/index.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  // use window.plimit
+&lt;/script&gt;
+</code></pre>
+<h2>Usage</h2>
+<p>The package assumes native promises are available</p>
+<p>This example shows iterating over accounts without loading all into memory</p>
+<pre><code class="language-js">import { MoreThan } from 'typeorm';
+import { Account } from './model/account'; // typescript model
+
+const runner    = plimit(4); // runner that allows 4 concurrent tasks
+let   accountId = '';
+
+while(true) {
+  const account = await Account.findOne({ uuid: MoreThan(accountId) });
+  if (!account) break;
+  accountId = account.uuid;
+
+  // resolves instantly it's queue is not full
+  // waits for a previous task if it's queue is full
+  await runner.push(async () =&gt; {
+    // some lengthy process on the account
+  });
+}
+
+// Process remainder
+await runner.flush();
+</code></pre>
