@@ -12,7 +12,7 @@ npm install --save @finwo/p-limit
 
 ```js
 # node
-import { plimit } from 'plimit';
+import { plimit } from '@finwo/p-limit';
 ```
 
 ```html
