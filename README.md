@@ -29,7 +29,7 @@ This example shows iterating over accounts without loading all into memory
 
 ```js
 import { MoreThan } from 'typeorm';
-import { Account } from './model/account'; // typescript model
+import { Account } from './model/account'; // typeorm model
 
 const runner    = plimit(4); // runner that allows 4 concurrent tasks
 let   accountId = '';
