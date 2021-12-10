@@ -1,6 +1,8 @@
-# plimit
+# @finwo/p-limit
 
 Simple promise concurrency limiter
+
+> **Please Note:** Due to the very limited scope of this module, I do not anticipate needing to make very many changes to it.  Expect long stretches of zero updates—that does not mean that the module is outdated.
 
 ## Installation
 

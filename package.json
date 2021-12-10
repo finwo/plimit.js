@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{print $2}' | sed 's/[\",]//g' | tr -d '[[:space:]]') && npm deprecate \"@finwo/p-limit@<${PACKAGE_VERSION}\" \"Rolling release, please update to ${PACKAGE_VERSION}\""
+    "postpublish": "PACKAGE_VERSION=$(node -p \"require('./package.json').version\") PACKAGE_NAME=$(node -p \"require('./package.json').name\") && npm deprecate \"${PACKAGE_NAME}@<${PACKAGE_VERSION}\" \"Rolling release, please update to ${PACKAGE_VERSION}\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Robin Bron <robin@finwo.nl>",
+  "license": "MIT",
+  "funding": {
+    "url": "https://github.com/sponsors/finwo"
+  }
 }
